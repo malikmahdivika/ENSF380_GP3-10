@@ -27,7 +27,7 @@ public class Location {
     public ArrayList<Supply> getSupplies() {return this.supplies;}
 
     /*Add to ArrayList*/
-    public void addOccupants(DisasterVictim occupant) {
+    public void addOccupant(DisasterVictim occupant) {
         this.occupants.add(occupant);
     }
 
@@ -36,7 +36,7 @@ public class Location {
     }
 
     /*Remove from ArrayList*/
-    public void removeOccupants(DisasterVictim occupant) {
+    public void removeOccupant(DisasterVictim occupant) {
         this.occupants.remove(occupant);
     }
 

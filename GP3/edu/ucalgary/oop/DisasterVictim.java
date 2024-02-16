@@ -55,7 +55,7 @@ public class DisasterVictim {
     public String getGender() {return this.gender;}
 
     /*Add to ArrayList*/
-    public void addPersonalBelongings(Supply supply) {
+    public void addPersonalBelonging(Supply supply) {
         this.personalBelongings.add(supply);
     }
 
@@ -68,7 +68,7 @@ public class DisasterVictim {
     }
 
     /*Remove from ArrayList*/
-    public void removePersonalBelongings(Supply supply) {
+    public void removePersonalBelonging(Supply supply) {
         this.personalBelongings.remove(supply);
     }
 
