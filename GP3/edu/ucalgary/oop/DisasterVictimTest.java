@@ -126,9 +126,9 @@ public class DisasterVictimTest {
 
         FamilyRelation relation = new FamilyRelation(victim2, "parent", victim1);
         FamilyRelation[] expectedRelations = {relation};
-        victim2.setFamilyConnections(expectedRelations);
+        victim2.setFamilyConnections(new ArrayList<>(Arrays.asList(expectedRelations)));
 
-        FamilyRelation[] testFamily = victim2.getFamilyConnections();
+        FamilyRelation[] testFamily = victim2.getFamilyConnections().toArray(new FamilyRelation[0]);;
         boolean correct = false;
 
         if ((testFamily!=null) && (testFamily[0] == expectedRelations[0])) {
@@ -141,7 +141,7 @@ public class DisasterVictimTest {
     public void testAddPersonalBelonging() {
         Supply newSupply = new Supply("Emergency Kit", 1);
         victim.addPersonalBelonging(newSupply);
-        Supply[] testSupplies = victim.getPersonalBelongings();
+        Supply[] testSupplies = victim.getPersonalBelongings().toArray(new Supply[0]);
         boolean correct = false;
  
         int i;
@@ -161,14 +161,14 @@ public void testRemoveFamilyConnection() {
         FamilyRelation relation2 = new FamilyRelation(victim, "sibling", victim2);
         FamilyRelation[] expectedRelations = {relation2};
         FamilyRelation[] originalRelations = {relation1, relation2};
-        victim.setFamilyConnections(originalRelations);
+        victim.setFamilyConnections(new ArrayList<>(Arrays.asList(originalRelations)));
 
         DisasterVictim victim = new DisasterVictim("Freda", "2024-01-23");
         victim.addFamilyConnection(relation1);
         victim.addFamilyConnection(relation2);
         victim.removeFamilyConnection(relation1);
 
-        FamilyRelation[] testFamily = victim.getFamilyConnections();
+        FamilyRelation[] testFamily = victim.getFamilyConnections().toArray(new FamilyRelation[0]);
         boolean correct = true;
 
         int i;
@@ -187,7 +187,7 @@ public void testRemovePersonalBelonging() {
         victim.addPersonalBelonging(supplyToRemove); 
         victim.removePersonalBelonging(supplyToRemove);
 
-        Supply[] testSupplies = victim.getPersonalBelongings();
+        Supply[] testSupplies = victim.getPersonalBelongings().toArray(new Supply[0]);
         boolean correct = true;
  
         int i;
@@ -207,11 +207,11 @@ public void testRemovePersonalBelonging() {
 
         FamilyRelation relation = new FamilyRelation(victim1, "sibling", victim2);
         FamilyRelation[] expectedRelations = {relation};
-        victim1.setFamilyConnections(expectedRelations);
+        victim1.setFamilyConnections(new ArrayList<>(Arrays.asList(expectedRelations)));
         boolean correct = true;
 
        // We have not studied overriding equals in arrays of custom objects so we will manually evaluate equality
-       FamilyRelation[] actualRecords = victim1.getFamilyConnections();
+       FamilyRelation[] actualRecords = victim1.getFamilyConnections().toArray(new FamilyRelation[0]);
        if (expectedRelations.length != actualRecords.length) {
            correct = false;
        } else {    
@@ -232,8 +232,8 @@ public void testSetMedicalRecords() {
     boolean correct = true;
 
     MedicalRecord[] newRecords = { testRecord };
-    victim.setMedicalRecords(newRecords);
-    MedicalRecord[] actualRecords = victim.getMedicalRecords();
+    victim.setMedicalRecords(new ArrayList<>(Arrays.asList(newRecords)));
+    MedicalRecord[] actualRecords = victim.getMedicalRecords().toArray(new MedicalRecord[0]);
 
     // We have not studied overriding equals in arrays of custom objects so we will manually evaluate equality
     if (newRecords.length != actualRecords.length) {
@@ -257,8 +257,8 @@ public void testSetPersonalBelongings() {
     Supply[] newSupplies = {one, two};
     boolean correct = true;
 
-    victim.setPersonalBelongings(newSupplies);
-    Supply[] actualSupplies = victim.getPersonalBelongings();
+    victim.setPersonalBelongings(new ArrayList<>(Arrays.asList(newSupplies)));
+    Supply[] actualSupplies = victim.getPersonalBelongings().toArray(new Supply[0]);
 
     // We have not studied overriding equals in arrays of custom objects so we will manually evaluate equality
     if (newSupplies.length != actualSupplies.length) {
