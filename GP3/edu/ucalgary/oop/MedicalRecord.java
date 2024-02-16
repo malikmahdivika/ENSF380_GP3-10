@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 public class MedicalRecord {
     private Location location;
     private String treatmentDetails;
-    private LocalDate dateOfTreatment;
+    private String dateOfTreatment;
 
     public MedicalRecord(Location location, String treatmentDetails, String dateOfTreatment){
         this.location = location;
@@ -24,10 +24,9 @@ public class MedicalRecord {
 
     public void setDateOfTreatment(String date) throws IllegalArgumentException {
         try {
-            this.dateOfTreatment = LocalDate.parse(date);
+            LocalDate.parse(date);
+            this.dateOfTreatment = date;
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid Format. Provide the date in the format 'YYYY-MM-DD'.");
-        } catch (Exception e) {
             throw new IllegalArgumentException("Invalid Format. Provide the date in the format 'YYYY-MM-DD'.");
         }
     }
@@ -37,5 +36,5 @@ public class MedicalRecord {
 
     public String getTreatmentDetails() {return this.treatmentDetails;}
 
-    public LocalDate getDateOfTreatment() {return this.dateOfTreatment;}
+    public String getDateOfTreatment() {return this.dateOfTreatment;}
 }
