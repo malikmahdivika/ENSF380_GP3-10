@@ -1,62 +1,76 @@
 package edu.ucalgary.oop;
-
+import java.time.LocalDate;
 public class ReliefService {
-    //-----------------------------------------------------------------------------------------------
-    // LOCAL VARIABLES
-    //-----------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------
+    //                               LOCAL VARIABLES
+    //--------------------------------------------------------------------------------
     private Inquirer inquirer;
     private DisasterVictim missingPerson;
     private String dateOfInquiry;
+    private String infoProvided;
     private Location lastKnownLocation;
 
-    //-----------------------------------------------------------------------------------------------
-    // PUBLIC FUNCTIONS
-    //-----------------------------------------------------------------------------------------------
+    
+    //--------------------------------------------------------------------------------
+    //                               FUNCTIONS
+    //--------------------------------------------------------------------------------
     public ReliefService(Inquirer inquirer, DisasterVictim missingPerson, String dateOfInquiry, String infoProvided, 
                          Location lastKnownLocation) {
         this.inquirer = inquirer;
         this.missingPerson = missingPerson;
         this.dateOfInquiry = dateOfInquiry;
+        this.infoProvided = infoProvided;
         this.lastKnownLocation = lastKnownLocation;
     }
-    
+
     public Inquirer getInquirer() {
         return this.inquirer;
     }
-    
+
+    public void setInquirer(Inquirer inquirer) {
+        this.inquirer = inquirer;
+    }
+
     public DisasterVictim getMissingPerson() {
         return this.missingPerson;
     }
-    
+
+    public void setMissingPerson(DisasterVictim missingPerson) {
+        this.missingPerson = missingPerson;
+    }
+
     public String getDateOfInquiry() {
         return this.dateOfInquiry;
     }
-    
+
+    public void setDateOfInquiry(String dateOfInquiry) throws IllegalArgumentException {
+        try {
+            LocalDate.parse(dateOfInquiry);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid date format");
+        }
+        this.dateOfInquiry = dateOfInquiry;
+    }
+
+    public String getInfoProvided() {
+        return this.infoProvided;
+    }
+
+    public void setInfoProvided(String infoProvided) {
+        this.infoProvided = infoProvided;
+    }
+
     public Location getLastKnownLocation() {
         return this.lastKnownLocation;
     }
 
-    public void setDateOfInquiry(String date) throws IllegalArgumentException {
-        try {
-            LocalDate.parse(date);
-            this.dateOfInquiry = date;
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid Format. Provide the date in the format 'YYYY-MM-DD'.");
-        }
+    public void setLastKnownLocation(Location lastKnownLocation) {
+        this.lastKnownLocation = lastKnownLocation;
     }
-    
-    public void setLastKnownLocation(Location location) {
-        this.lastKnownLocation = location;
-    }
-    
-    public void setInfoProvided(String info) {
-        this.inquirer.setInfoProvided(info);
-    }
-    
+
     public String getLogDetails() {
         return "Inquirer: " + this.inquirer.getFirstName() + ", Missing Person: " + this.missingPerson.getName() + ", " +
-                "Date of Inquiry: " + this.dateOfInquiry + ", Info Provided: " + this.inquirer.getInfoProvided() + ", " +
+                "Date of Inquiry: " + this.dateOfInquiry + ", Info Provided: " + this.infoProvided + ", " +
                 "Last Known Location: " + this.lastKnownLocation.getName();
     }
-    
 }
