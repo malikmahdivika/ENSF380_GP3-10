@@ -11,16 +11,22 @@ public class DisasterVictim {
     private String dateOfBirth;
     private String comments;
     private int ASSIGNED_SOCIAL_ID;
-    private ArrayList<MedicalRecord> medicalRecords;
-    private ArrayList<FamilyRelation> familyConnection;
+    private ArrayList<MedicalRecord> medicalRecords = new ArrayList<MedicalRecord>();
+    private ArrayList<FamilyRelation> familyConnection = new ArrayList<FamilyRelation>();
     private String entryDate;
-    private ArrayList<Supply> personalBelongings;
-    private String gender;
-    private static int counter; 
+    private ArrayList<Supply> personalBelongings = new ArrayList<Supply>();
+    private String gender; 
+    private static int counter = 0;
 
     public DisasterVictim(String fName, String eDate){
+        this.ASSIGNED_SOCIAL_ID = counter++;
         this.firstName = fName;
-        this.entryDate = eDate;
+        try {
+            LocalDate.parse(eDate);
+            this.entryDate = eDate;
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid Format. Provide the date in the format 'YYYY-MM-DD'.");
+        }
     }
 
     /*Setters*/
