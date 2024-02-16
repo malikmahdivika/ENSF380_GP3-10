@@ -46,10 +46,11 @@ public class ReliefService {
     public void setDateOfInquiry(String dateOfInquiry) throws IllegalArgumentException {
         try {
             LocalDate.parse(dateOfInquiry);
+            this.dateOfInquiry = dateOfInquiry;
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid date format");
         }
-        this.dateOfInquiry = dateOfInquiry;
+        
     }
 
     public String getInfoProvided() {
@@ -69,7 +70,8 @@ public class ReliefService {
     }
 
     public String getLogDetails() {
-        return "Inquirer: " + this.inquirer.getFirstName() + ", Missing Person: " + this.missingPerson.getName() + ", " +
+        return "Inquirer: " + this.inquirer.getFirstName() + ", Missing Person: " + this.missingPerson.getFirstName() + 
+                this.missingPerson.getLastName()+ ", " +
                 "Date of Inquiry: " + this.dateOfInquiry + ", Info Provided: " + this.infoProvided + ", " +
                 "Last Known Location: " + this.lastKnownLocation.getName();
     }

@@ -44,7 +44,7 @@ public class DisasterVictim {
 
     /*Getters*/
     public String getFirstName() {return this.firstName;}
-    public String getLirstName() {return this.lastName;}
+    public String getLastName() {return this.lastName;}
     public String getDateOfBirth() {return this.dateOfBirth;}
     public String getComments() {return this.comments;}
     public ArrayList<MedicalRecord> getMedicalRecords() {return this.medicalRecords;}
