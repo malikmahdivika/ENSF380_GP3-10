@@ -69,10 +69,12 @@ public class DisasterVictim {
     }
 
     public void addFamilyConnection(FamilyRelation newConnection) {
-        FamilyRelation[] newArray = new FamilyRelation[familyConnection.length + 1];
-        System.arraycopy(familyConnection, 0, newArray, 0, familyConnection.length);
-        newArray[familyConnection.length] = newConnection;
-        familyConnection = newArray;
+        if (familyConnection == null) {
+            familyConnection = new FamilyRelation[1];
+        } else {
+            familyConnection = Arrays.copyOf(familyConnection, familyConnection.length + 1);
+        }
+        familyConnection[familyConnection.length - 1] = newConnection;
     }
 
     public void addMedicalRecord(MedicalRecord newRecord) {
