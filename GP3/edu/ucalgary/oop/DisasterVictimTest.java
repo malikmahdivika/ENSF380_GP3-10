@@ -30,13 +30,13 @@ public class DisasterVictimTest {
         suppliesToSet = new ArrayList<>();
         suppliesToSet.add(new Supply("Water Bottle", 10));
         suppliesToSet.add(new Supply("Blanket", 5));
-        
+
         DisasterVictim victim1 = new DisasterVictim("Jane", "2024-01-20");
         DisasterVictim victim2 = new DisasterVictim("John", "2024-01-22");
-        
+
     }
 
-  		  
+
 
   @Test
     public void testConstructorWithValidEntryDate() {
@@ -65,7 +65,7 @@ public class DisasterVictimTest {
     public void testSetDateOfBirthWithInvalidFormat() {
         victim.setDateOfBirth(invalidDate); // This format should cause an exception
     }
-	
+
 	@Test
     public void testSetAndGetFirstName() {
         String newFirstName = "Alice";
@@ -109,15 +109,15 @@ public class DisasterVictimTest {
     public void testGetEntryDate() {
         assertEquals("getEntryDate should return the expected entry date", EXPECTED_ENTRY_DATE, victim.getEntryDate());
     }
-   
+
     @Test
     public void testSetAndGetGender() {
         String newGender = "male";
         victim.setGender(newGender);
         assertEquals("setGender should update and getGender should return the new gender", newGender.toLowerCase(), victim.getGender());
     }
-	
-	
+
+
 
     @Test
     public void testAddFamilyConnection() {
@@ -126,9 +126,9 @@ public class DisasterVictimTest {
 
         FamilyRelation relation = new FamilyRelation(victim2, "parent", victim1);
         FamilyRelation[] expectedRelations = {relation};
-        victim2.setFamilyConnections(new ArrayList<>(Arrays.asList(expectedRelations)));
+        victim2.setFamilyConnections(expectedRelations);
 
-        FamilyRelation[] testFamily = victim2.getFamilyConnections().toArray(new FamilyRelation[0]);;
+        FamilyRelation[] testFamily = victim2.getFamilyConnections();
         boolean correct = false;
 
         if ((testFamily!=null) && (testFamily[0] == expectedRelations[0])) {
@@ -141,9 +141,9 @@ public class DisasterVictimTest {
     public void testAddPersonalBelonging() {
         Supply newSupply = new Supply("Emergency Kit", 1);
         victim.addPersonalBelonging(newSupply);
-        Supply[] testSupplies = victim.getPersonalBelongings().toArray(new Supply[0]);
+        Supply[] testSupplies = victim.getPersonalBelongings();
         boolean correct = false;
- 
+
         int i;
         for (i = 0; i < testSupplies.length; i++) {
             if (testSupplies[i] == newSupply) {
@@ -161,14 +161,14 @@ public void testRemoveFamilyConnection() {
         FamilyRelation relation2 = new FamilyRelation(victim, "sibling", victim2);
         FamilyRelation[] expectedRelations = {relation2};
         FamilyRelation[] originalRelations = {relation1, relation2};
-        victim.setFamilyConnections(new ArrayList<>(Arrays.asList(originalRelations)));
+        victim.setFamilyConnections(originalRelations);
 
         DisasterVictim victim = new DisasterVictim("Freda", "2024-01-23");
         victim.addFamilyConnection(relation1);
         victim.addFamilyConnection(relation2);
         victim.removeFamilyConnection(relation1);
 
-        FamilyRelation[] testFamily = victim.getFamilyConnections().toArray(new FamilyRelation[0]);
+        FamilyRelation[] testFamily = victim.getFamilyConnections();
         boolean correct = true;
 
         int i;
@@ -182,14 +182,14 @@ public void testRemoveFamilyConnection() {
 
 @Test
 public void testRemovePersonalBelonging() {
-    
+
         Supply supplyToRemove = suppliesToSet.get(0); 
         victim.addPersonalBelonging(supplyToRemove); 
         victim.removePersonalBelonging(supplyToRemove);
 
-        Supply[] testSupplies = victim.getPersonalBelongings().toArray(new Supply[0]);
+        Supply[] testSupplies = victim.getPersonalBelongings();
         boolean correct = true;
- 
+
         int i;
         for (i = 0; i < testSupplies.length; i++) {
             if (testSupplies[i] == supplyToRemove) {
@@ -207,11 +207,11 @@ public void testRemovePersonalBelonging() {
 
         FamilyRelation relation = new FamilyRelation(victim1, "sibling", victim2);
         FamilyRelation[] expectedRelations = {relation};
-        victim1.setFamilyConnections(new ArrayList<>(Arrays.asList(expectedRelations)));
+        victim1.setFamilyConnections(expectedRelations);
         boolean correct = true;
 
        // We have not studied overriding equals in arrays of custom objects so we will manually evaluate equality
-       FamilyRelation[] actualRecords = victim1.getFamilyConnections().toArray(new FamilyRelation[0]);
+       FamilyRelation[] actualRecords = victim1.getFamilyConnections();
        if (expectedRelations.length != actualRecords.length) {
            correct = false;
        } else {    
@@ -232,8 +232,8 @@ public void testSetMedicalRecords() {
     boolean correct = true;
 
     MedicalRecord[] newRecords = { testRecord };
-    victim.setMedicalRecords(new ArrayList<>(Arrays.asList(newRecords)));
-    MedicalRecord[] actualRecords = victim.getMedicalRecords().toArray(new MedicalRecord[0]);
+    victim.setMedicalRecords(newRecords);
+    MedicalRecord[] actualRecords = victim.getMedicalRecords();
 
     // We have not studied overriding equals in arrays of custom objects so we will manually evaluate equality
     if (newRecords.length != actualRecords.length) {
@@ -257,8 +257,8 @@ public void testSetPersonalBelongings() {
     Supply[] newSupplies = {one, two};
     boolean correct = true;
 
-    victim.setPersonalBelongings(new ArrayList<>(Arrays.asList(newSupplies)));
-    Supply[] actualSupplies = victim.getPersonalBelongings().toArray(new Supply[0]);
+    victim.setPersonalBelongings(newSupplies);
+    Supply[] actualSupplies = victim.getPersonalBelongings();
 
     // We have not studied overriding equals in arrays of custom objects so we will manually evaluate equality
     if (newSupplies.length != actualSupplies.length) {
@@ -275,10 +275,5 @@ public void testSetPersonalBelongings() {
 }
 
 
-    
+
 }
-
-
-
-
-
